@@ -1,0 +1,1187 @@
+<!-- =========================
+Wharphy — Production-ready static site (Netlify)
+1) Create a folder (e.g., wharphy-site)
+2) Save THIS file as: index.html
+3) Deploy folder to Netlify (drag folder/zip in desktop, or zip on iPad)
+
+Brand:
+- Font: Roboto
+- Primary: #00DD61 (Shyp Green)
+- Black: #000000
+- Secondary: #44A4FF (Dodger Blue)
+========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#00DD61" />
+  <meta name="color-scheme" content="light" />
+
+  <title>Wharphy — Same-Day Delivery for Shopify Merchants</title>
+  <meta name="description" content="Wharphy provides fast, reliable same-day delivery for Shopify merchants with real-time tracking, proof of delivery, and simple pricing." />
+  <link rel="canonical" href="https://wharphy.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wharphy — Same-Day Delivery for Shopify Merchants" />
+  <meta property="og:description" content="Fast, reliable same-day delivery with tracking, proof of delivery, and simple pricing." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wharphy.com/" />
+  <meta property="og:image" content="https://wharphy.com/og.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wharphy — Same-Day Delivery for Shopify Merchants" />
+  <meta name="twitter:description" content="Fast, reliable same-day delivery with tracking, proof of delivery, and simple pricing." />
+
+  <!-- Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --green:#00DD61;
+      --black:#000000;
+      --blue:#44A4FF;
+
+      --bg:#ffffff;
+      --surface:#f7f8fa;
+      --surface2:#eef1f4;
+      --text:#111318;
+      --muted:#5a6573;
+      --border:rgba(17,19,24,.12);
+
+      --shadow: 0 10px 30px rgba(0,0,0,.10);
+      --shadow2: 0 6px 18px rgba(0,0,0,.08);
+
+      --radius: 18px;
+      --radius-sm: 12px;
+      --container: 1120px;
+
+      --focus: 0 0 0 3px rgba(68,164,255,.30);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: "Roboto", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* Accessibility */
+    .skip{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{
+      left:16px; top:16px; width:auto; height:auto; padding:10px 12px;
+      background:var(--bg); border:1px solid var(--border); border-radius:10px;
+      box-shadow:var(--shadow2); z-index:9999;
+    }
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 10px; }
+
+    a{ color:inherit; text-decoration:none; }
+    a.underline{ text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
+    p{ margin:0 0 14px; color:var(--muted); }
+    h1,h2,h3{ margin:0; color:var(--black); line-height:1.15; letter-spacing:-.02em; }
+    h1{ font-size: clamp(34px, 4vw, 56px); }
+    h2{ font-size: clamp(26px, 3vw, 38px); }
+    h3{ font-size: 18px; letter-spacing:-.01em; }
+    small{ color:var(--muted); }
+
+    .container{
+      width:min(var(--container), calc(100% - 40px));
+      margin-inline:auto;
+    }
+
+    /* Top bar / header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      font-weight:700; letter-spacing:-.02em;
+    }
+    .logo{
+      width:34px; height:34px;
+      display:grid; place-items:center;
+      border-radius: 11px;
+      background: var(--green);
+      box-shadow: 0 8px 18px rgba(0,221,97,.22);
+    }
+    .logo svg{ display:block; }
+    .navlinks{
+      display:flex; align-items:center; gap: 18px;
+    }
+    .navlinks a{
+      color: var(--muted);
+      font-weight: 500;
+      padding: 10px 10px;
+      border-radius: 10px;
+    }
+    .navlinks a:hover{ background: rgba(0,0,0,.04); color: var(--black); }
+    .nav-cta{
+      display:flex; align-items:center; gap: 10px;
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      border:1px solid transparent;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor:pointer;
+      transition: transform .08s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: var(--green);
+      color: var(--black);
+      box-shadow: 0 10px 24px rgba(0,221,97,.20);
+    }
+    .btn-primary:hover{ box-shadow: 0 14px 32px rgba(0,221,97,.26); }
+    .btn-ghost{
+      background: transparent;
+      border-color: var(--border);
+      color: var(--black);
+    }
+    .btn-ghost:hover{ background: rgba(0,0,0,.03); }
+    .btn-blue{
+      background: rgba(68,164,255,.12);
+      border-color: rgba(68,164,255,.25);
+      color: var(--black);
+    }
+    .btn-blue:hover{ background: rgba(68,164,255,.16); }
+
+    .icon{
+      width:18px; height:18px; display:inline-block;
+      color: var(--black);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 52px 0 32px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-120px -60px auto -60px;
+      height:420px;
+      background:
+        radial-gradient(closest-side, rgba(0,221,97,.25), rgba(0,221,97,0) 70%),
+        radial-gradient(closest-side, rgba(68,164,255,.20), rgba(68,164,255,0) 70%);
+      filter: blur(4px);
+      z-index:-1;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,221,97,.12);
+      border: 1px solid rgba(0,221,97,.25);
+      color: var(--black);
+      font-weight: 700;
+      width: fit-content;
+      margin-bottom: 16px;
+    }
+    .kicker .dot{
+      width: 10px; height: 10px; border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(0,221,97,.20);
+    }
+    .lead{
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 60ch;
+      margin-top: 14px;
+    }
+    .hero-cta{
+      margin-top: 22px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+    }
+    .trust{
+      margin-top: 18px;
+      display:flex; flex-wrap:wrap; gap: 10px 14px;
+      align-items:center;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .trust .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.03);
+      border: 1px solid var(--border);
+    }
+    .trust .chip svg{ color: var(--green); }
+
+    /* Hero card */
+    .panel{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .panel-head{
+      padding: 18px 18px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,0));
+    }
+    .panel-title{
+      display:flex; align-items:center; gap: 10px;
+      font-weight: 800;
+      color: var(--black);
+    }
+    .badge{
+      display:inline-flex; align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(68,164,255,.12);
+      border:1px solid rgba(68,164,255,.25);
+      font-weight: 800;
+      color: var(--black);
+    }
+    .panel-body{ padding: 18px; }
+    .stat-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .stat{
+      padding: 14px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+    .stat strong{
+      display:block;
+      font-size: 20px;
+      color: var(--black);
+      letter-spacing:-.02em;
+    }
+    .stat span{ color: var(--muted); font-weight: 500; font-size: 13px; }
+    .mini{
+      display:flex; gap: 10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+    .mini svg{ color: var(--green); margin-top: 2px; }
+    .mini b{ color: var(--black); }
+    .mini p{ margin: 2px 0 0; font-size: 14px; }
+
+    /* Sections */
+    section{ padding: 56px 0; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+    .section-head p{ margin: 0; max-width: 68ch; }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      padding: 18px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+    }
+    .card .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0,221,97,.12);
+      border: 1px solid rgba(0,221,97,.25);
+      font-weight: 800;
+      color: var(--black);
+      font-size: 12px;
+      letter-spacing: .01em;
+    }
+    .card p{ margin: 0; }
+
+    /* How it works */
+    .steps{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .step-list{
+      display:grid;
+      gap: 12px;
+    }
+    .step{
+      display:flex; gap: 12px; align-items:flex-start;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+    .num{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      font-weight: 900;
+      background: rgba(68,164,255,.12);
+      border: 1px solid rgba(68,164,255,.25);
+      color: var(--black);
+      flex: 0 0 auto;
+    }
+    .step b{ color: var(--black); }
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+    .price-card{
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+    }
+    .price-card.featured{
+      border-color: rgba(0,221,97,.40);
+      box-shadow: 0 18px 45px rgba(0,0,0,.10);
+      position:relative;
+      overflow:hidden;
+    }
+    .price-card.featured::before{
+      content:"";
+      position:absolute; inset:-40px -60px auto auto;
+      width: 180px; height: 180px;
+      background: radial-gradient(closest-side, rgba(0,221,97,.25), rgba(0,221,97,0) 70%);
+      z-index:0;
+    }
+    .price-card > *{ position:relative; z-index:1; }
+    .price-top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .price{
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      color: var(--black);
+      margin: 6px 0 6px;
+    }
+    .price small{ font-size: 14px; font-weight: 700; color: var(--muted); }
+    ul{
+      margin: 12px 0 18px;
+      padding: 0;
+      list-style:none;
+      display:grid;
+      gap: 10px;
+    }
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .li svg{ flex: 0 0 auto; color: var(--green); margin-top: 2px; }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    details{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      background:#fff;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 800;
+      color: var(--black);
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width: 18px; height: 18px;
+      transition: transform .15s ease;
+      color: var(--black);
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+    details p{ margin: 10px 0 0; }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      align-items:start;
+    }
+    form{
+      background:#fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+    }
+    label{
+      display:block;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: var(--black);
+    }
+    input, textarea, select{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font: inherit;
+      color: var(--text);
+      outline:none;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .hint{
+      font-size: 13px;
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,0));
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap: 18px;
+      flex-wrap:wrap;
+    }
+    .foot a{ color: var(--muted); font-weight: 600; }
+    .foot a:hover{ color: var(--black); text-decoration:underline; text-underline-offset:3px; }
+    .foot .mini-links{ display:flex; gap: 14px; flex-wrap:wrap; }
+
+    /* Mobile */
+    .menu-btn{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-weight: 900;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .steps{ grid-template-columns: 1fr; }
+      .pricing{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .faq{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      .row{ grid-template-columns: 1fr; }
+      .navlinks{ display:none; }
+      .menu-btn{ display:inline-flex; align-items:center; gap:10px; }
+      .nav.is-open .navlinks{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        width:100%;
+        gap:6px;
+        padding: 10px 0 0;
+      }
+      .nav.is-open{
+        flex-wrap:wrap;
+      }
+      .nav-cta{
+        margin-left:auto;
+      }
+    }
+
+    /* Subtle motion preferences */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      *{ transition:none !important; }
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Wharphy",
+    "url":"https://wharphy.com/",
+    "description":"Same-day delivery for Shopify merchants with tracking, proof of delivery, and simple pricing.",
+    "sameAs":[]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <nav class="nav" id="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Wharphy home">
+          <span class="logo" aria-hidden="true">
+            <!-- W mark -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7.2l3.4 11h2.6l2-7.1 2 7.1h2.6L20 7.2h-2.2l-1.8 7.5-2-7.5h-2.2l-2 7.5L6.2 7.2H4z" fill="#000000"/>
+            </svg>
+          </span>
+          <span>Wharphy</span>
+        </a>
+
+        <button class="menu-btn btn btn-ghost" type="button" id="menuBtn" aria-expanded="false" aria-controls="navLinks">
+          <span aria-hidden="true">☰</span> Menu
+        </button>
+
+        <div class="navlinks" id="navLinks">
+          <a href="#services">Services</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-cta">
+          <a class="btn btn-ghost" href="#contact">Get a quote</a>
+          <a class="btn btn-primary" href="#contact" aria-label="Start with Wharphy">
+            Start now
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M13 5l7 7-7 7" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 12h15" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">
+              <span class="dot" aria-hidden="true"></span>
+              Same-day delivery that feels effortless
+            </div>
+
+            <h1>Same-day delivery for Shopify merchants—fast, reliable, on brand.</h1>
+            <p class="lead">
+              Wharphy helps you delight customers with on-time delivery, real-time tracking,
+              and proof of delivery—without needing your own fleet.
+            </p>
+
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#contact">
+                Request onboarding
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 7l-8.5 9L4 10.5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a class="btn btn-blue" href="#how">
+                See how it works
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 5v14" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M5 12h14" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </a>
+            </div>
+
+            <div class="trust" aria-label="Trust indicators">
+              <span class="chip">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="#00DD61" stroke-width="2" />
+                </svg>
+                Proof of delivery
+              </span>
+              <span class="chip">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 12h4l3-7 4 14 3-7h4" stroke="#00DD61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Real-time tracking
+              </span>
+              <span class="chip">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Same-day reliability
+              </span>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Highlights">
+            <div class="panel-head">
+              <div class="panel-title">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 7h18M6 7v12h12V7" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M9 11h6M9 15h6" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Merchant-ready delivery
+              </div>
+              <span class="badge">Shopify-friendly</span>
+            </div>
+            <div class="panel-body">
+              <div class="stat-grid" role="list">
+                <div class="stat" role="listitem">
+                  <strong>Fast pickups</strong>
+                  <span>Scheduled or on-demand</span>
+                </div>
+                <div class="stat" role="listitem">
+                  <strong>Live status</strong>
+                  <span>ETA updates + notifications</span>
+                </div>
+                <div class="stat" role="listitem">
+                  <strong>Proof of delivery</strong>
+                  <span>Photo + signature options</span>
+                </div>
+                <div class="stat" role="listitem">
+                  <strong>Simple pricing</strong>
+                  <span>Transparent, scalable</span>
+                </div>
+              </div>
+
+              <div class="mini">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3v9l7 4" stroke="#00DD61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12a9 9 0 1 1-9-9" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <b>Operationally reliable</b>
+                  <p>Dispatch workflows designed for consistent, repeatable outcomes.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Delivery that matches your customer experience</h2>
+            <p>From pickup to doorstep, Wharphy helps you deliver with confidence—fast ETAs, clear updates, and brand-safe handoffs.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="top">
+              <span class="pill">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 12h18" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M7 8l-4 4 4 4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M17 8l4 4-4 4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                On-demand & scheduled
+              </span>
+            </div>
+            <h3>Pickups that fit your ops</h3>
+            <p>Set daily pickup windows or request on demand—perfect for peak volume and promotions.</p>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <span class="pill">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 2l3 7h7l-5.5 4 2.2 7L12 16l-6.7 4 2.2-7L2 9h7l3-7z" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                Customer-friendly
+              </span>
+            </div>
+            <h3>Tracking + proactive updates</h3>
+            <p>Real-time status, ETAs, and delivery notifications so customers always know what to expect.</p>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <span class="pill">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 11l3 3L22 4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2 2h11" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Proof built-in
+              </span>
+            </div>
+            <h3>Proof of delivery</h3>
+            <p>Photo and signature options to reduce “where is my order?” tickets and chargeback risk.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>How it works</h2>
+            <p>Set it up once, then run a clean dispatch loop—orders in, deliveries out, visibility end-to-end.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step-list">
+            <div class="step">
+              <div class="num">1</div>
+              <div>
+                <b>Onboard your store & lanes</b>
+                <p>We capture pickup details, service zones, cutoff times, and handling requirements.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">2</div>
+              <div>
+                <b>Create orders fast</b>
+                <p>Submit manually, via CSV, or using simple integrations—then dispatch in minutes.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">3</div>
+              <div>
+                <b>Deliver with tracking + proof</b>
+                <p>Customers get ETA updates. You get proof of delivery and clean reporting.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">4</div>
+              <div>
+                <b>Review performance</b>
+                <p>Track on-time rates, exceptions, and volume—optimize routes and pickup windows.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Service guarantees">
+            <div class="panel-head">
+              <div class="panel-title">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 7l-8.5 9L4 10.5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                What you get
+              </div>
+              <span class="badge">Operational clarity</span>
+            </div>
+            <div class="panel-body">
+              <div class="mini">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 6v6l4 2" stroke="#00DD61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12a9 9 0 1 1-9-9" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <b>Reliable ETAs</b>
+                  <p>Clear timelines with proactive status updates.</p>
+                </div>
+              </div>
+
+              <div style="height:10px"></div>
+
+              <div class="mini">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 12h16" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 4v16" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <b>Fewer support tickets</b>
+                  <p>Tracking + proof reduces customer “where is it?” pings.</p>
+                </div>
+              </div>
+
+              <div style="height:10px"></div>
+
+              <div class="mini">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 18h12" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M8 16V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v10" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <b>Simple reporting</b>
+                  <p>Track delivery outcomes, exceptions, and volume.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Pricing that scales with your volume</h2>
+            <p>Pick a starting plan and customize as you grow. (Replace these numbers with your real pricing.)</p>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <div class="price-card">
+            <div class="price-top">
+              <h3>Starter</h3>
+              <span class="badge">Good for testing</span>
+            </div>
+            <div class="price">$0 <small>/ month</small></div>
+            <p>For merchants validating same-day delivery in a limited area.</p>
+            <ul>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Manual order entry
+              </li>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Tracking link + notifications
+              </li>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Proof of delivery
+              </li>
+            </ul>
+            <a class="btn btn-ghost" href="#contact">Talk to sales</a>
+          </div>
+
+          <div class="price-card featured" aria-label="Most popular plan">
+            <div class="price-top">
+              <h3>Growth</h3>
+              <span class="badge">Most popular</span>
+            </div>
+            <div class="price">$199 <small>/ month</small></div>
+            <p>For merchants running daily pickups and consistent volume.</p>
+            <ul>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Scheduled pickups + service windows
+              </li>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Branded tracking experience
+              </li>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Basic route optimization & reporting
+              </li>
+            </ul>
+            <a class="btn btn-primary" href="#contact">Start Growth</a>
+            <p class="hint">Tip: Offer per-delivery pricing on top of the platform fee.</p>
+          </div>
+
+          <div class="price-card">
+            <div class="price-top">
+              <h3>Scale</h3>
+              <span class="badge">For teams</span>
+            </div>
+            <div class="price">$499 <small>/ month</small></div>
+            <p>For multi-location merchants and higher daily delivery volume.</p>
+            <ul>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Multiple pickup locations
+              </li>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                Advanced reporting + support
+              </li>
+              <li class="li">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7l-8.5 9L4 10.5" stroke="#00DD61" stroke-width="2"/></svg>
+                API / webhook options (optional)
+              </li>
+            </ul>
+            <a class="btn btn-ghost" href="#contact">Request Scale</a>
+          </div>
+        </div>
+
+        <p class="hint" style="margin-top:14px;">
+          Replace pricing copy with your real packages. If you want, tell me your actual pricing model and I’ll rewrite this section to match.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>FAQ</h2>
+            <p>Quick answers merchants ask before launching same-day delivery.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>
+              What areas do you serve?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <p>Wharphy can be configured by service zones. Add your city/metro coverage here and expand as volume grows.</p>
+          </details>
+
+          <details>
+            <summary>
+              Do customers get tracking?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <p>Yes—customers receive real-time status and ETA updates, plus proof of delivery when complete.</p>
+          </details>
+
+          <details>
+            <summary>
+              Can I schedule daily pickups?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <p>Absolutely. Set one or more pickup windows per day based on your fulfillment flow and cutoff times.</p>
+          </details>
+
+          <details>
+            <summary>
+              What proof of delivery is available?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <p>Photo proof is standard. Signature capture can be added for higher-value deliveries or regulated items.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Get Wharphy set up</h2>
+            <p>Tell us your pickup location, typical order volume, and desired cutoff times. We’ll respond with next steps.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <form name="wharphy-leads" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <!-- Netlify form setup -->
+            <input type="hidden" name="form-name" value="wharphy-leads" />
+            <p style="display:none;">
+              <label>Don’t fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <div class="row">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" autocomplete="name" required />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div class="row">
+              <div>
+                <label for="company">Company</label>
+                <input id="company" name="company" autocomplete="organization" />
+              </div>
+              <div>
+                <label for="volume">Daily orders (estimate)</label>
+                <select id="volume" name="daily_orders">
+                  <option value="1-10">1–10</option>
+                  <option value="11-50">11–50</option>
+                  <option value="51-150">51–150</option>
+                  <option value="150+">150+</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div>
+              <label for="message">What do you want to deliver same-day?</label>
+              <textarea id="message" name="message" placeholder="Example: Shopify orders within 15 miles, pickup at 2pm and 5pm, weekends included."></textarea>
+              <p class="hint">This form works on Netlify automatically—submissions will appear in your Netlify site dashboard.</p>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <button class="btn btn-primary" type="submit">
+              Submit
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M22 2L11 13" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 2l-7 20-4-9-9-4 20-7z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+
+          <aside class="panel">
+            <div class="panel-head">
+              <div class="panel-title">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 12a9 9 0 0 1 18 0" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M8 12a4 4 0 0 1 8 0" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 12v7" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Contact details
+              </div>
+              <span class="badge">Replace these</span>
+            </div>
+            <div class="panel-body">
+              <p><b>Email:</b> <a class="underline" href="mailto:ops@wharphy.com">ops@wharphy.com</a></p>
+              <p><b>Phone:</b> <a class="underline" href="tel:+16025550123">(602) 555-0123</a></p>
+              <p><b>Hours:</b> Mon–Sat, 8am–8pm</p>
+
+              <div style="height:10px"></div>
+
+              <div class="mini">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" stroke="#00DD61" stroke-width="2"/>
+                  <path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="#00DD61" stroke-width="2"/>
+                </svg>
+                <div>
+                  <b>Service area</b>
+                  <p>Update with your primary metro and typical radius.</p>
+                </div>
+              </div>
+
+              <div style="height:10px"></div>
+
+              <div class="mini">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 4h16v16H4z" stroke="#00DD61" stroke-width="2"/>
+                  <path d="M8 8h8M8 12h8M8 16h5" stroke="#00DD61" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <b>What to include</b>
+                  <p>Pickup address, cutoff times, average daily orders, delivery radius.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:8px;">
+            <span class="logo" aria-hidden="true" style="width:30px;height:30px;border-radius:10px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7.2l3.4 11h2.6l2-7.1 2 7.1h2.6L20 7.2h-2.2l-1.8 7.5-2-7.5h-2.2l-2 7.5L6.2 7.2H4z" fill="#000000"/>
+              </svg>
+            </span>
+            <span>Wharphy</span>
+          </div>
+          <small>© <span id="year"></span> Wharphy. All rights reserved.</small>
+        </div>
+
+        <div class="mini-links" aria-label="Footer links">
+          <a href="#services">Services</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    (function () {
+      const nav = document.getElementById('nav');
+      const btn = document.getElementById('menuBtn');
+      const links = document.getElementById('navLinks');
+
+      if (btn && nav && links) {
+        btn.addEventListener('click', () => {
+          const open = nav.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+
+        // Close menu when a link is tapped (mobile)
+        links.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            if (nav.classList.contains('is-open')) {
+              nav.classList.remove('is-open');
+              btn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+      // Footer year
+      const y = document.getElementById('year');
+      if (y) y.textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>
